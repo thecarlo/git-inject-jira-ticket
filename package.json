@@ -77,10 +77,5 @@
     "typescript",
     "git commit hook",
     "husky commit hook"
-  ],
-  "overrides": {
-    "vite": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
-  }
+  ]
 }
