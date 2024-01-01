@@ -60,7 +60,37 @@ It will expect Jira tickets to be in the format of `FOO-1234`
 
 Valid branches would be `feature-FOO-1234`, `feature-FOO-1234-some-message`, `feature/FOO-1234` etc.
 
-### 2. Override the Jira Ticket Number's Number of Expected Digits
+### 2. Override the allowed branch prefixes
+
+The default allowed `branchTypes` are `feature`, `hotfix`, `revert`, `release`, `build`, `ci`, `docs`, `fix`, `performance`, `refactor` and `test`
+
+To override `branchTypes`:
+
+To only allow `feature` and `hotfix` branch types:
+
+`gitInjectJiraTicket.json`
+
+```
+{
+  "branchConfiguration": {
+    "branchTypes": [
+      "feature",
+      "hotfix"
+    ]
+  }
+}
+```
+
+For example:
+
+these branches would be valid:
+
+- `feature-JIRA-1234`
+- or `hotfix-JIRA-1234-implement-caching`
+- or `feature/JIRA-1234-implement-caching`
+- or `hotfix/JIRA-1234/implement-caching` etc.
+
+### 3. Override the Jira Ticket Number's Number of Expected Digits
 
 The default value for `jiraTicketLength` is `1,` which means that the Jira ticket is expected to have 1 or more digits.
 For example, these would all be valid: `JIRA-1`, `JIRA-12`, `JIRA-12324` etc.
@@ -77,7 +107,7 @@ To change this to only have 4 digits:
 
 Now only 4 digits would be valid, for example: `JIRA-1234`
 
-### 3. Capitalize commit messages
+### 4. Capitalize commit messages
 
 The default value for `capitalizeMessage` is `true`.
 
