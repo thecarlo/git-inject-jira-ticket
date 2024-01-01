@@ -44,7 +44,7 @@ Refer to the [Configuration](src/interfaces/configuration.ts) interface for all 
 
 ### Example configurations
 
-#### 1. Override the Jira Project Key
+### 1. Override the Jira Project Key
 
 `gitInjectJiraTicket.json`
 
@@ -60,7 +60,7 @@ It will expect Jira tickets to be in the format of `FOO-1234`
 
 Valid branches would be `feature-FOO-1234`, `feature-FOO-1234-some-message`, `feature/FOO-1234` etc.
 
-#### 2. Override the Jira Ticket Number's Number of Expected Digits
+### 2. Override the Jira Ticket Number's Number of Expected Digits
 
 The default value for `jiraTicketLength` is `1,` which means that the Jira ticket is expected to have 1 or more digits.
 For example, these would all be valid: `JIRA-1`, `JIRA-12`, `JIRA-12324` etc.
@@ -77,7 +77,7 @@ To change this to only have 4 digits:
 
 Now only 4 digits would be valid, for example: `JIRA-1234`
 
-#### 3. Capitalize commit messages
+### 3. Capitalize commit messages
 
 The default value for `capitalizeMessage` is `true`.
 
