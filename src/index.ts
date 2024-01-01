@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { injectJiraTicket } from '@functions/injectJiraTicket';
+import { main } from '@functions/main';
 
 (async () => {
-  await injectJiraTicket();
+  await main();
 })();
