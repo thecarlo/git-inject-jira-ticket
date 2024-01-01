@@ -86,6 +86,7 @@ This capitalizes the first letter of the commit message.
 For example:
 
 branch: `feature-JIRA-1234`
+
 `git commit -m "some message. with another sentence"`
 
 //=> `JIRA-1234: Some message. with another sentence`

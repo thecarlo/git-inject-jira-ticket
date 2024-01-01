@@ -1,6 +1,6 @@
 {
   "name": "@humankode/git-inject-jira-ticket",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "description": "A script for the prepare-commit-msg git hook that automatically injects a Jira ticket based off the jira ticket in the branch name",
   "repository": "github:thecarlo/git-inject-jira-ticket",
