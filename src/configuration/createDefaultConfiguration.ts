@@ -18,8 +18,6 @@ export const createDefaultConfiguration = (
 
   const jiraRegex = `${jiraIssuePrefix}-[0-9]{${jiraTicketLength}}(?![0-9])`;
 
-  console.log('jiraRegex', jiraRegex);
-
   return {
     jiraIssuePrefix,
     jiraTicketExample,
@@ -35,6 +33,7 @@ export const createDefaultConfiguration = (
       ],
     },
     messageConfiguration: {
+      capitalizeMessage: true,
       messageJiraPrefixRegex: `^${jiraRegex}\\s*[:]?\\s*`,
       messageJiraRegex: `${jiraRegex}`,
       messageExtractRegex: `(?<=${jiraIssuePrefix}-[0-9]{${jiraTicketLength}}\\s*:\\s*)\\S.*`,

@@ -31,8 +31,6 @@ export const loadConfiguration = async (): Promise<Configuration> => {
   );
 
   if (!jsonConfiguration) {
-    console.log('No configuration file found. Using default configuration.');
-
     return defaultConfiguration;
   }
 
@@ -51,8 +49,6 @@ export const loadConfiguration = async (): Promise<Configuration> => {
   }
 
   const mergedConfig = merge({}, defaultConfiguration, configuration);
-
-  console.log('mergedConfig', JSON.stringify(mergedConfig));
 
   return mergedConfig;
 };

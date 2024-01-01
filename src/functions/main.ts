@@ -1,13 +1,14 @@
 import { loadConfiguration } from '@configuration/loadConfiguration';
 import { getCurrentBranchName } from '@functions/branch/getCurrentBranchName';
-import { getTicketFromBranch } from '@functions/branch/getTicketFromBranch';
 import { validateBranch } from '@functions/branch/validateBranch';
 import { getCurrentCommitMessage } from '@functions/message/getCurrentCommitMessage';
 import { getTicketFromMessage } from '@functions/message/getTicketFromMessage';
-import { updateCurrentCommitMessage } from '@functions/message/updateCurrentCommitMessage';
+import { updateCommitMessage } from '@functions/message/updateCommitMessage';
 import { validateMessage } from '@functions/message/validateMessage';
 
-export const injectJiraTicket = async (): Promise<void> => {
+import { getTicketFromBranch } from './branch/getTicketFromBranch';
+
+export const main = async (): Promise<void> => {
   const configuration = await loadConfiguration();
 
   const branch = await getCurrentBranchName();
@@ -24,13 +25,20 @@ export const injectJiraTicket = async (): Promise<void> => {
     process.exit(1);
   }
 
+  const { messageConfiguration } = configuration;
+
+  const { capitalizeMessage } = messageConfiguration;
+
   const jiraTicket = getTicketFromBranch(branch, configuration);
 
   const ticketFromMessageResult = getTicketFromMessage(message, configuration);
 
-  const { isTicketInMessage } = ticketFromMessageResult;
+  await updateCommitMessage(
+    message,
+    ticketFromMessageResult,
+    jiraTicket,
+    capitalizeMessage,
+  );
 
-  if (!isTicketInMessage) {
-    updateCurrentCommitMessage(message, jiraTicket);
-  }
+  process.exit(0);
 };
