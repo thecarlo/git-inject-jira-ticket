@@ -77,6 +77,32 @@ To change this to only have 4 digits:
 
 Now only 4 digits would be valid, for example: `JIRA-1234`
 
+#### 3. Capitalize commit messages
+
+The default value for `capitalizeMessage` is `true`.
+
+This capitalizes the first letter of the commit message.
+
+For example:
+
+branch: `feature-JIRA-1234`
+`git commit -m "some message. with another sentence"`
+
+//=> `JIRA-1234: Some message. with another sentence`
+
+To override `capitalizeMessage`:
+
+`gitInjectJiraTicket.json`
+
+```
+{
+  "messageConfiguration": {
+    "capitalizeMessage": false
+  }
+}
+
+```
+
 ## Maintainers
 
 - [Carlo van Wyk](https://github.com/thecarlo)
