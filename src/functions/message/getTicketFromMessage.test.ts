@@ -17,6 +17,29 @@ describe('getTicketFromMessage', () => {
     });
   });
 
+  it(`should return isTicketPrefixed=false for a Jira ticket without ':'`, () => {
+    const message = 'JIRA-1234';
+
+    const result = getTicketFromMessage(message, defaultConfig);
+
+    expect(result).toEqual({
+      isTicketInMessage: true,
+      isTicketPrefixed: false,
+    });
+  });
+
+  it(`should return isTicketPrefixed=true for a Jira ticket with spacing around ' : '`, () => {
+    const message = 'JIRA-1234 : foo';
+
+    const result = getTicketFromMessage(message, defaultConfig);
+
+    expect(result).toEqual({
+      isTicketInMessage: true,
+      isTicketPrefixed: true,
+      ticket: 'JIRA-1234',
+    });
+  });
+
   it('should detect a valid Jira ticket in the message but not prefixed', () => {
     const message = 'Implement caching JIRA-1234';
 

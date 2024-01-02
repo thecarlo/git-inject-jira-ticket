@@ -34,7 +34,7 @@ export const createDefaultConfiguration = (
     },
     messageConfiguration: {
       capitalizeMessage: true,
-      messageJiraPrefixRegex: `^${jiraRegex}\\s*[:]?\\s*`,
+      messageJiraPrefixRegex: `^${jiraRegex}(?=\\s*:\\s*)\\s*:\\s*`,
       messageJiraRegex: `${jiraRegex}`,
       messageExtractRegex: `(?<=${jiraIssuePrefix}-[0-9]{${jiraTicketLength}}\\s*:\\s*)\\S.*`,
       messageExample: `${jiraIssuePrefix}-1234`,
