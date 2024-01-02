@@ -14,5 +14,5 @@ export const capitalizeMessage = (message: string): string => {
 
   const capitalizedSentence = capitalizeFirstLetter(capitalizedMessage.trim());
 
-  return `${identifier}: ${capitalizedSentence}`;
+  return `${identifier.toUpperCase()}: ${capitalizedSentence}`;
 };
