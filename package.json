@@ -1,6 +1,6 @@
 {
   "name": "@humankode/git-inject-jira-ticket",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "description": "A script for the prepare-commit-msg git hook that automatically injects a Jira ticket based off the jira ticket in the branch name",
   "repository": "github:thecarlo/git-inject-jira-ticket",
@@ -25,7 +25,9 @@
     "lint:fix": "eslint --fix 'src/**/*.ts'",
     "prettier": "prettier --check 'src/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts'",
-    "prepare": "husky install"
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "devDependencies": {
     "@types/chalk": "^2.2.0",
@@ -50,6 +52,7 @@
     "lilconfig": "^3.0.0",
     "lodash": "^4.17.21",
     "or": "^0.2.0",
+    "pinst": "^3.0.0",
     "prettier": "^3.1.1",
     "prettier-eslint": "^16.2.0",
     "ts-jest": "^29.1.1",
