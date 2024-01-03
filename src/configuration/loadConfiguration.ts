@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { mergeWith } from 'lodash';
 
 import { lilconfig } from 'lilconfig';
 
@@ -6,6 +6,7 @@ import { Configuration } from '@interfaces/configuration';
 import { ConfigurationDefaults } from '@interfaces/configurationDefaults';
 
 import { createDefaultConfiguration } from './createDefaultConfiguration';
+import { customMerge } from './customMerge';
 
 export const loadConfiguration = async (): Promise<Configuration> => {
   const explorer = lilconfig('git-inject-jira-ticket', {
@@ -48,7 +49,12 @@ export const loadConfiguration = async (): Promise<Configuration> => {
     return defaultConfiguration;
   }
 
-  const mergedConfig = merge({}, defaultConfiguration, configuration);
+  const mergedConfig = mergeWith(
+    {},
+    defaultConfiguration,
+    configuration,
+    customMerge,
+  );
 
   return mergedConfig;
 };
