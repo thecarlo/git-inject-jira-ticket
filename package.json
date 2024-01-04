@@ -21,6 +21,7 @@
   "scripts": {
     "build": "npx tsc && tsup",
     "test": "jest",
+    "test:coverage": "jest --coverage --silent --maxWorkers=50%",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'",
     "prettier": "prettier --check 'src/**/*.ts'",
