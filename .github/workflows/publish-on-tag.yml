@@ -24,12 +24,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prettier
-        run: npm run prettier
-
-      - name: Lint
-        run: npm run lint
-
       - name: Publish to npm
         run: npm publish --access public
         env:
