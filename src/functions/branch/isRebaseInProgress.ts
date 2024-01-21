@@ -18,8 +18,6 @@ export const isRebaseInProgress = async (): Promise<boolean> => {
       .access(join('.git', 'rebase-apply'))
       .then(
         () => {
-          console.log('rebase apply in progress...');
-
           return true;
         },
         () => false,

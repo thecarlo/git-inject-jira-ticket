@@ -6,8 +6,6 @@ export const isMergeInProgress = async (): Promise<boolean> => {
     try {
       await fs.access(join('.git', 'MERGE_HEAD'));
 
-      console.log('merge in progress...');
-
       return true;
     } catch (error) {
       return false;
