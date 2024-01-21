@@ -1,6 +1,9 @@
 import chalk from 'chalk';
 
 import { getTicketFromBranch } from '@functions/branch/getTicketFromBranch';
+import { isCherryPickInProgress } from '@functions/branch/isCherryPickInProgress';
+import { isMergeInProgress } from '@functions/branch/isMergeInProgress';
+import { isRebaseInProgress } from '@functions/branch/isRebaseInProgress';
 import { getTicketFromMessage } from '@functions/message/getTicketFromMessage';
 import { Configuration } from '@interfaces/configuration';
 import { ValidateMessageResult } from '@interfaces/validateMessageResult';
@@ -9,12 +12,24 @@ import { validateCommitMessageWithJiraTicket } from './validateCommitMessageWith
 import { validateJiraTicketFormatInMessage } from './validateJiraTicketFormatInMessage';
 import { validateMessageLength } from './validateMessageLength';
 
-export const validateMessage = (
+export const validateMessage = async (
   branch: string,
   message: string,
   configuration: Configuration,
-): ValidateMessageResult => {
+): Promise<ValidateMessageResult> => {
   let hasValidationError = false;
+
+  const isRebase = await isRebaseInProgress();
+
+  const isMerge = await isMergeInProgress();
+
+  const isCherryPick = await isCherryPickInProgress();
+
+  if (isRebase || isMerge || isCherryPick) {
+    return {
+      success: true,
+    };
+  }
 
   const ticketFromMessageResult = getTicketFromMessage(message, configuration);
 

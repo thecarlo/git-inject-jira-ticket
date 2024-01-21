@@ -13,11 +13,15 @@ export const main = async (): Promise<void> => {
 
   const branch = await getCurrentBranchName();
 
-  validateBranch(branch, configuration);
+  await validateBranch(branch, configuration);
 
   const message = await getCurrentCommitMessage();
 
-  const validateMessageResult = validateMessage(branch, message, configuration);
+  const validateMessageResult = await validateMessage(
+    branch,
+    message,
+    configuration,
+  );
 
   const { success: validateMessageSuccess } = validateMessageResult;
 
