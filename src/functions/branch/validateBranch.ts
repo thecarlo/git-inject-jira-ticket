@@ -4,13 +4,16 @@ import { Configuration } from '@interfaces/configuration';
 
 import { createDefaultBranchTypes } from './createDefaultBranchTypes';
 import { doBranchFullRegexCheck } from './doBranchFullRegexCheck';
+import { isCherryPickInProgress } from './isCherryPickInProgress';
+import { isMergeInProgress } from './isMergeInProgress';
+import { isRebaseInProgress } from './isRebaseInProgress';
 import { validateBranchJiraTicket } from './validateBranchJiraTicket';
 import { validateBranchPrefix } from './validateBranchPrefix';
 
-export const validateBranch = (
+export const validateBranch = async (
   branch: string,
   configuration: Configuration,
-): void => {
+): Promise<void> => {
   const { branchConfiguration, jiraTicketExample } = configuration;
 
   const branchRegexSuccess = doBranchFullRegexCheck(
@@ -18,7 +21,13 @@ export const validateBranch = (
     branchConfiguration,
   );
 
-  if (branchRegexSuccess) {
+  const isRebase = await isRebaseInProgress();
+
+  const isMerge = await isMergeInProgress();
+
+  const isCherryPick = await isCherryPickInProgress();
+
+  if (branchRegexSuccess || isRebase || isMerge || isCherryPick) {
     return;
   }
 
